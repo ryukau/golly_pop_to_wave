@@ -101,3 +101,4 @@ if not os.path.exists("snd"):
 for gen in xrange(2, 32):
     for _ in xrange(128):
         render(8820, 128, 128, gen)
+g.show("Rendering finished.")

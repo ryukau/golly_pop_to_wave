@@ -12,9 +12,23 @@ $ mv Script/pop-to-wave.py /path/to/golly/Script
 
 $ cp -r /path/to/golly/Script/snd .
 $ python3 concat_wav.py
+
+$ mkdir snd_test
+$ cp snd/*.wav snd_test/
+$ python3 clustering.py
 ```
 
 # Dependency
-`pop-to-wave.py` is Python2 and dependent on [`scipy.io.wavfile.write`](https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.io.wavfile.write.html#scipy.io.wavfile.write) in SciPy 1.0.0.
+## Python2
+- [`scipy.io.wavfile.write`](https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.io.wavfile.write.html#scipy.io.wavfile.write) in SciPy 1.0.0.
 
-`concat_wav.py` is Python3 and dependent on [matplotlib](https://matplotlib.org/), [NumPy](http://www.numpy.org/), [PySoundFile](https://pysoundfile.readthedocs.io/en/0.9.0/) and `ffmpeg`.
+## Python3
+- [matplotlib](https://matplotlib.org/)
+- [NumPy](http://www.numpy.org/)
+- [PySoundFile](https://pysoundfile.readthedocs.io/en/0.9.0/)
+- [python_speech_features](https://python-speech-features.readthedocs.io/en/latest/)
+- [scikit-learn](https://scikit-learn.org/stable/index.html)
+- [SciPy](https://www.scipy.org/)
+
+## External Applicatin
+- `ffmpeg`

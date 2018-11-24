@@ -83,7 +83,7 @@ def create_spectral_cluster(sounds, points, n_clusters):
         n_clusters=n_clusters).fit(points)
     write_result("spectral", n_clusters, cluster.labels_, sounds)
 
-data_directory = "snd_test"
+data_directory = "snd"
 sounds = create_sound_list(data_directory)
 points = gather_points(sounds)
 
@@ -96,7 +96,6 @@ create_spectral_cluster(sounds, points, n_clusters)
 TODO:
 # 評価。
 # 特徴の正規化。
-# DBSCANの使い方を調べる。
 
 DONE:
 # 他のクラスタリングを試す。
@@ -117,4 +116,10 @@ DBSCANは使い方がわからなかった。
 
 # 特徴を変える。
 `scipy.signal.spectrogram` から `python_speech_features.mfcc` に変えたところ結果が改善した。
+
+# DBSCANの使い方を調べる
+DBSCANは空間を格子に区切って、格子内のデータポイントの密度に応じてクラスタを作る。
+今回のデータでは次元の高さに対してデータポイントの数が少なすぎてDBSCANは使えなさそう。
+
+- [Visualizing DBSCAN Clustering](https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/)
 """

@@ -25,14 +25,25 @@ class Sound:
         rule[1] = rule[1].replace("-", ",")
         return "P".join(rule)
 
-    def extract_spectrogram(self):
+    def extract_spectrogram(self, n_frame=39):
         self.frequency, self.time, self.spectrogram = signal.spectrogram(
             self.data, self.samplerate)
+        if self.spectrogram.shape[1] < n_frame:
+            zeros = numpy.zeros((self.spectrogram.shape[0],
+                                 n_frame - self.spectrogram.shape[1]))
+            self.spectrogram = numpy.concatenate((self.spectrogram, zeros), axis=1)
+        elif self.spectrogram.shape[1] > n_frame:
+            self.spectrogram = self.spectrogram[:][0:n_frame]
         self.raveled_spectrogram = numpy.ravel(self.spectrogram)
 
-    def extract_mfcc(self):
+    def extract_mfcc(self, n_frame=19):
         self.mfcc = python_speech_features.mfcc(
             self.data, self.samplerate, winlen=0.0116)
+        if self.mfcc.shape[0] < n_frame:
+            zeros = numpy.zeros((n_frame - self.mfcc.shape[0], self.mfcc.shape[1]))
+            self.mfcc = numpy.concatenate((self.mfcc, zeros), axis=0)
+        elif self.mfcc.shape[0] > n_frame:
+            self.mfcc = self.mfcc[0:n_frame]
         self.raveled_mfcc = numpy.ravel(self.mfcc)
 
 def create_sound_list(directory):
